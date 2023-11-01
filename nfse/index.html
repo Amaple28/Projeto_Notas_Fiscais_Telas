@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Nota Fiscal de Serviço</title>
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../lib/mdb/6.4.1/mdb.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+
+<body id="document_body"> 
+    <!-- Toasts notifications -->
+    <div id="toasts-container" style="position: absolute; top: 0; right: 0; z-index: 9999"></div>
+
+    <div id="app" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">            
+                    <div class="header__pane ml-auto">
+                        
+                        <style>
+                            .fs-4{
+                                margin-left:0.5em;
+                            }
+
+                            .dropdown{
+                                margin-top: 0.5em;
+                            }
+
+                            @media (max-width: 770px) {
+                                .dropdown-perfil{
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                }
+                            } 
+                        </style>
+
+                        <div class="container">
+                            <header class="d-flex flex-wrap justify-content-center py-3 border-bottom"> 
+                                <ul class="nav nav-pills"> 
+                                    <li class="nav-item"><a href="../nfe/index.html" tipo="nfe" class="nav-link">Notas de Produtos</a></li> 
+                                    <li class="nav-item"><a href="../nfse/index.html" tipo="nfse" class="nav-link">Notas de Serviços</a></li>
+                                    <li class="nav-item"><a href="../emitente/index.html" tipo="emitente" class="nav-link"> Configurações </a></li>
+                                </ul> 
+                            </header>
+                            
+                        </div> 
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="app-main">
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                        
+                    <style>
+                        .w-100{
+                            justify-content: space-between;
+                        }
+                    </style>
+
+                    <div class="container">
+                        <div class="row pt-4">
+                            <div class="card p-3">
+
+                                <div class="widget-box w-100 d-flex">
+                                    <h4 class="smaller">NFs-e (Nota de Serviços) </h4>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalnf">
+                                        Nova NFs-e
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalnf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Emitir Nota Fiscal</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body"> 
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="mb-3 col-md-12">
+                                                                        <label for="data_emissao" class="form-label"> Data da Venda </label>
+                                                                        <input type="date" class="form-control" name="data_emissao" max="9999-12-31T23:59" value="2023-11-01" autocomplete="off">
+                                                                    </div> 
+                                                                    <div class="mb-3 col-md-12">
+                                                                        <label for="valor_servico" class="form-label"> Valor do Serviço Prestado </label>
+                                                                        <input type="number" class="form-control" name="valor_servico" value="" autocomplete="off">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>     
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="button" class="btn btn-primary">Salvar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Número</th>
+                                            <th>Cliente</th>
+                                            <th>Valor</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody> 
+                                        <tr>
+                                            <td>00/00/0000</td>
+                                            <td>1</td>
+                                            <td>Nome Completo do Cliente</td>
+                                            <td>R$ 00,00</td>
+                                            <td>Aprovado</td>
+                                            <td>  
+                                                <a href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                    PDF
+                                                </a>
+                                                <a href="#" target="_blank" download=" " class="btn btn-success btn-sm">
+                                                    XML
+                                                </a> 
+                                            </td>
+                                        </tr> 
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+    
+
+    <script src="lib/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="lib/bootstrap/5.3.1/bootstrap.min.js"></script>
+
+    <script src="lib/notiflix/3.2.6/notiflix-notify-aio-3.2.6.min.js"></script>
+    <script src="lib/notiflix/3.2.6/notiflix-loading-aio-3.2.6.min.js"></script>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="lib/mdb/6.4.1/mdb.min.js"></script>
+    <!-- <script type="text/javascript" src="lib/mdb-pro/4.12.0/mdb.js"></script>-->
+
+    <!-- DataTables -->
+    <script type="text/javascript" src="lib/datatables/1.13.6/datatables-bootstrap-5.min.js"></script>
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+
+    <script>
+        //de acordo com a rota atual, adiciona a classe active no link correspondente
+        var url = window.location.href;
+        //pegar url a partir da penultima barra
+        url = url.split('/');
+        url1 = url[url.length - 1];
+        url2 = url[url.length - 2];
+        
+        //adiciona a classe active no link correspondente
+        var links = document.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            var linkHref = link.getAttribute('tipo');
+            if (linkHref.endsWith(url1)) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else if (linkHref.endsWith(url2)) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    </script>
+
+
+</body>
+</html>
+

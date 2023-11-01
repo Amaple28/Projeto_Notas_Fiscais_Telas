@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Emitente</title>
+    <link rel="shortcut icon" href="../img/icon.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../lib/mdb/6.4.1/mdb.min.css">
+</head>
+
+<body id="document_body"> 
+    <!-- Toasts notifications -->
+    <div id="toasts-container" style="position: absolute; top: 0; right: 0; z-index: 9999"></div>
+
+    <div id="app" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">            
+                    <div class="header__pane ml-auto">
+                        
+                        <style>
+                            .fs-4{
+                                margin-left:0.5em;
+                            }
+
+                            .dropdown{
+                                margin-top: 0.5em;
+                            }
+
+                            @media (max-width: 770px) {
+                                .dropdown-perfil{
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                }
+                            } 
+                        </style>
+
+                        
+                        <div class="container">
+                            <header class="d-flex flex-wrap justify-content-center py-3 border-bottom"> 
+                                <ul class="nav nav-pills"> 
+                                    <li class="nav-item"><a href="../nfe/index.html" tipo="nfe" class="nav-link">Notas de Produtos</a></li> 
+                                    <li class="nav-item"><a href="../nfse/index.html" tipo="nfse" class="nav-link">Notas de Serviços</a></li>
+                                    <li class="nav-item"><a href="../emitente/index.html" tipo="emitente" class="nav-link"> Configurações </a></li>
+                                </ul> 
+                            </header>
+                            
+                        </div> 
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="app-main">
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                        
+                        <div class="container">
+                            <div class="row pt-4">
+                                <div class="card p-3"> 
+                                    <div class="card-body">
+                                        <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <a class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#emitente-tab-pane" type="button" role="tab" aria-controls="emitente-tab-pane" aria-selected="false" href="index.html"> Emitente </a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tributacao-tab-pane" type="button" role="tab" aria-controls="tributacao-tab-pane" aria-selected="true"> Tributação </button>
+                                            </li>
+                                        </ul>
+
+                                        <div class="alert alert-danger" role="alert">
+                                            <h4 class="alert-heading">Atenção!</h4>
+                                            <p> Verifique com seu contador os impostos corretos para sua empresa! <br>
+                                                Não nos responsabilizamos pelo preenchimento incorreto destas informações.
+                                            </p>
+                                        </div>
+                                                        
+                                        <div class="tab-content" >
+                                            <div class="tab-pane fade" id="emitente-tab-pane" role="tabpanel"  tabindex="0">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p> Dados do Emitente </p>
+                                                        <form id="form_update_emitente"  method="POST">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                        <input type="hidden" name="emitente_id" value=" ">
+                                                            
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-md-4">
+                                                                                <label for="razao_social" class="form-label">Razão Social</label>
+                                                                                <input type="text" class="form-control" id="razao_social" name="razao_social" value=" ">
+                                                                            </div>
+                                                            
+                                                                            <div class="mb-3 col-md-4">
+                                                                                <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
+                                                                                <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia" value=" ">
+                                                                            </div>
+                                                            
+                                                                            <div class="mb-3 col-md-3">
+                                                                                <label for="nome_fantasia" class="form-label"> Certificado Digital </label>
+                                                                                <a href="#!" class="btn btn-primary form-control"  > Enviar Certificado </a>
+                                                                            </div>
+                                                            
+                                                                            <div class="mb-3 col-md-4">
+                                                                                <label for="cnpj" class="form-label">CNPJ</label>
+                                                                                <input type="text" class="form-control" id="cnpj" name="cnpj" value=" ">
+                                                                            </div>
+                                                            
+                                                                            <div class="mb-3 col-md-4">
+                                                                                <label for="insc_estadual" class="form-label">Inscrição Estadual</label>
+                                                                                <input type="text" class="form-control" id="insc_estadual" name="insc_estadual" value=" ">
+                                                                            </div>
+                                                            
+                                                                            <div class="mb-3 col-md-3">
+                                                                                <label for="telefone" class="form-label">Telefone</label>
+                                                                                <input type="tel" class="form-control" id="telefone" name="telefone" value=" ">
+                                                                            </div>
+                                                            
+                                                                            
+                                                                        </div>
+                                                                    
+                                                                </div>
+                                                            
+                                                                <hr class="col-12">
+                                                            
+                                                                <div class="mb-3 col-md-4">
+                                                                    <label for="endereco" class="form-label">Endereço</label>
+                                                                    <input type="text" class="form-control" id="endereco" name="endereco" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-2">
+                                                                    <label for="numero" class="form-label">Nº</label>
+                                                                    <input type="number" class="form-control" id="numero" name="numero" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="bairro" class="form-label">Bairro</label>
+                                                                    <input type="text" class="form-control" id="bairro" name="bairro" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="cep" class="form-label">CEP</label>
+                                                                    <input type="text" class="form-control" id="cep" name="cep" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label for="complemento" class="form-label">Complemento</label>
+                                                                    <input type="text" class="form-control" id="complemento" name="complemento" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-2">
+                                                                    <label for="uf" class="form-label">*Estado:</label> 
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-4">
+                                                                    <label for="cidade" class="form-label">*Cidade:</label> 
+                                                                </div>
+                                                                
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="insc_municipal" class="form-label">Inscrição Municipal</label>
+                                                                    <input type="number" class="form-control" id="insc_municipal" name="insc_municipal" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="regime_id" class="form-label">Regime Tributário</label> 
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="email" class="form-label">E-mail</label>
+                                                                    <input type="email" class="form-control" id="email" name="email" value=" ">
+                                                                </div>
+                                                            
+                                                                <div class="mb-3 col-md-3">
+                                                                    <label for="ambiente_nfe" class="form-label"> Ambiente de Emissão NF-e (Produtos) </label> 
+                                                                </div> 
+                                                            </div>
+                                                            <div class="col-md-12 mb-3">
+                                                                <a href="#!" class="btn btn-success"> Salvar </a>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade show active" id="tributacao-tab-pane" role="tabpanel" tabindex="0">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <p> Impostos da Nota de Serviços </p> 
+                                                                    <ul class="nav nav-tabs mb-2" role="tablist">
+                                                                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_impostos_servicos" type="button" role="tab" aria-selected="true" > Serviços </button>
+                                                                    </ul>
+                                                        
+                                                                    <div class="tab-content"> 
+                                                                        <div class="tab-pane fade show active" id="tab_impostos_servicos" role="tabpanel">
+                                                                            <form action="{{route('nfse.impostos.update', $nfse_impostos->id)}}" id="{{$form_id}}" method="POST">
+                                                                                <div class="row">
+                                                                                    <div class="col">
+                                                                                        <div class="row">
+                                                                                        <div class="mb-3 col-md-3">
+                                                                                            <label for="cod_tributacao_nacional" class="form-label"> Selecione um serviço </label> 
+                                                                                        </div>
+                                                        
+                                                                                            <div class="mb-3 col-md-3">
+                                                                                                <label class="form-label"> Cód. de Tributação no município </label>
+                                                                                                <input type="text" class="form-control" name="cod_complementar_municipal" value=" ">
+                                                                                            </div>
+                                                        
+                                                                                            <div class="mb-3 col-md-3">
+                                                                                                <label class="form-label"> Cód. CNAE </label>
+                                                                                                <input type="text" class="form-control" name="cod_cnae" value=" ">
+                                                                                            </div>
+                                                        
+                                                                                            
+                                                                                            <div class="col">
+                                                                                                <a href="#!" class="btn btn-success" > Salvar Alterações</a>
+                                                                                            </div>
+                                                        
+                                                                                            <div class="mb-3 col-md-3">
+                                                                                                <label class="form-label"> Tributação do ISS </label> 
+                                                                                            </div>
+                                                        
+                                                                                            <div class="mb-3 col-md-3">
+                                                                                                <label class="form-label"> Retenção do ISS </label> 
+                                                                                            </div>
+                                                        
+                                                                                            <div class="mb-3 col-md-3">
+                                                                                                <label class="form-label"> Alíquota do ISS </label>
+                                                                                                
+                                                                                                <div class="col-12 d-flex d-inline-flex">
+                                                                                                    <input type="text" class="form-control" name="aliquota_issqn" value=" ">
+                                                                                                    <div class="p-1"> % </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                        
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        
+                                                                    </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <p> Impostos da Nota de Produtos </p> 
+                                                                    <ul class="nav nav-tabs mb-2" id="natureza_operacoes" role="tablist"> 
+                                                                        <li class="nav-item" role="presentation">  
+                                                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#natureza_0" type="button" role="tab" aria-selected="false"> </button>
+                                                                        </li> 
+                                                                    </ul>
+                                                        
+                                                                    <div class="tab-content"> 
+                                                                            <div class="tab-pane fade " id="natureza_0" role="tabpanel">
+                                                                                <form  id="0" method="POST">
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <div class="row">
+                                                                                                <div class="mb-3 col-md-3">
+                                                                                                    <label class="form-label"> CFOP Dentro do Estado </label>
+                                                                                                    <input type="number" class="form-control" name="cfop_dentro_estado" >
+                                                                                                </div>
+                                                                                                <div class="mb-3 col-md-3">
+                                                                                                    <label class="form-label"> CFOP Fora do Estado </label>
+                                                                                                    <input type="number" class="form-control" name="cfop_fora_estado" >
+                                                                                                </div>
+                                                                                                <div class="col">
+                                                                                                    <a href="#!" class="btn btn-success" > Salvar Alterações</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                            <p> Tributos </p>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-3">
+                                                                                                    <div class="card">
+                                                                                                        <div class="card-header bg-primary text-white">Nome do Imposto</div>
+                                                                                                        <div class="card-body">
+                                                                                                            <div class="mb-3 col">
+                                                                                                                <label class="form-label"> Código da Situação Tributária: </label> 
+                                                                                                            </div>
+                                                                                                            <div class="mb-3 col">
+                                                                                                                <div class="row">
+                                                                                                                    <div class="col-12">
+                                                                                                                        <label class="form-label"> Base de Cálculo: (%) </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="col-6 d-flex d-inline-flex">
+                                                                                                                        <input type="text" class="form-control" >
+                                                                                                                        <div class="p-1"> % </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="mb-3 col">
+                                                                                                                <div class="row">
+                                                                                                                    <div class="col-12">
+                                                                                                                        <label class="form-label"> Alíquota: (%) </label>
+                                                                                                                    </div>
+                                                                                                                    <div class="col-6 d-flex d-inline-flex">
+                                                                                                                        <input type="text" class="form-control" >
+                                                                                                                        <div class="p-1"> % </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div> 
+                                                                    </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+    
+
+    <script src="lib/jquery/3.7.1/jquery.min.js"></script>
+
+    <script src="lib/bootstrap/5.3.1/bootstrap.min.js"></script>
+
+    <script src="lib/notiflix/3.2.6/notiflix-notify-aio-3.2.6.min.js"></script>
+    <script src="lib/notiflix/3.2.6/notiflix-loading-aio-3.2.6.min.js"></script>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="lib/mdb/6.4.1/mdb.min.js"></script>
+    <!-- <script type="text/javascript" src="lib/mdb-pro/4.12.0/mdb.js"></script>-->
+
+    <!-- DataTables -->
+    <script type="text/javascript" src="lib/datatables/1.13.6/datatables-bootstrap-5.min.js"></script>
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
+
+    <script>
+        //de acordo com a rota atual, adiciona a classe active no link correspondente
+        var url = window.location.href;
+        //pegar url a partir da penultima barra
+        url = url.split('/');
+        url1 = url[url.length - 1];
+        url2 = url[url.length - 2];
+        url3 = url[url.length - 3];
+        
+        //adiciona a classe active no link correspondente
+        var links = document.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            var linkHref = link.getAttribute('tipo');
+            if (linkHref.endsWith(url1)) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else if (linkHref.endsWith(url2)) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            } else if (linkHref.endsWith(url3)) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+
+        });
+    </script>
+
+
+</body>
+</html>
+
